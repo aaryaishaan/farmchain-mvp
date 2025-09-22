@@ -17,21 +17,21 @@ FarmChain is a web-first MVP to trace agricultural produce from farm → consume
 - Git
 - (Optional) Docker/Docker Compose — only for production container runs
 
-## Quick local setup (dev)
+# Quick local setup (dev)
 
 ### 1. Clone repo
-\`\`\`bash
-git clone <repo-url>
-cd farmchain
-\`\`\`
 
-### 2. Install dependencies
-\`\`\`bash
-# from repo root
-npm install
-cd frontend && npm install
-cd ../backend && npm install
-\`\`\`
+git clone <repo-url> <br>
+cd farmchain
+
+
+## 2. Install dependencies
+
+### from repo root
+npm install <br>
+cd frontend && npm install <br>
+cd ../backend && npm install <br>
+
 
 ### 3. Environment variables
 Create .env files in /backend:
@@ -44,18 +44,20 @@ FRONTEND_URL=http://localhost:5173
 \`\`\`
 
 ### 4. Run DB migrations & seed demo data
-\`\`\`bash
-# backend
-cd backend
-npx prisma migrate dev --name init
-npm run seed
-\`\`\`
+
+## backend
+cd backend <br>
+npx prisma migrate dev --name init <br>
+npm run seed <br>
+
 
 ### 5. Start dev servers
-\`\`\`bash
-# from repo root (recommended)
-npm run dev
 
+### from repo root (recommended)
+npm run dev
+ ### Alternative: Start the frontend and backend sever individually 
+  cd frontend && npm run dev <br>
+  cd backend && npm run dev <br>
 # which runs:
 # frontend: http://localhost:5173
 # backend:  http://localhost:4000
