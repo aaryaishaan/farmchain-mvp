@@ -1,0 +1,21 @@
+{
+  "users": [
+    { "name": "Demo Farmer", "email": "farmer@demo.test", "password": "Password123", "role": "FARMER" },
+    { "name": "Demo Distributor", "email": "distributor@demo.test", "password": "Password123", "role": "DISTRIBUTOR" },
+    { "name": "Demo Retailer", "email": "retailer@demo.test", "password": "Password123", "role": "RETAILER" },
+    { "name": "Demo Consumer", "email": "consumer@demo.test", "password": "Password123", "role": "CONSUMER" }
+  ],
+  "batches": [
+    {
+      "batchId": "FARM-2025-0001",
+      "title": "Organic Tomatoes Lot A",
+      "variety": "Cherry",
+      "quantity": 100,
+      "unit": "kg",
+      "harvestDate": "2025-09-01T00:00:00.000Z",
+      "location": "22.5726,88.3639",
+      "images": "[]",
+      "farmerEmail": "farmer@demo.test"
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  batches   Batch[]  @relation("FarmerBatches")
+  events    Event[]  @relation("ActorEvents")
+  
+  @@map("users")
+}
+
+model Batch {
+  id          String   @id @default(cuid())
+  batchId     String   @unique  // e.g., FARM-2025-0001
+  title       String
+  variety     String?
+  quantity    Int
+  unit        String
+  harvestDate DateTime
+  location    String?   // lat,long or address
+  images      String   // JSON array of file paths
+  farmerId    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  farmer      User     @relation("FarmerBatches", fields: [farmerId], references: [id])
+  events      Event[]
+  
+  @@map("batches")
+}
+
+model Event {
+  id          String   @id @default(cuid())
+  batchId     String
+  actorId     String
+  actorRole   String
+  action      String   // e.g., CREATED, PICKED_UP, IN_TRANSIT, DELIVERED, PRICE_SET, VERIFIED_ON_CHAIN
+  details     String   // JSON string for flexible data
+  txHash      String?  // mock blockchain tx hash
+  confirmed   Boolean  @default(false)
+  timestamp   DateTime @default(now())
+  
+  // Relations
+  batch       Batch    @relation(fields: [batchId], references: [id])
+  actor       User     @relation("ActorEvents", fields: [actorId], references: [id])
+  
+  @@map("events")
+}
+
+model MockTransaction {
+  id          String   @id @default(cuid())
+  txHash      String   @unique
+  batchId     String
+  action      String
+  status      String   @default("pending") // pending, confirmed, failed
+  createdAt   DateTime @default(now())
+  confirmedAt DateTime?
+  
+  @@map("mock_transactions")
+}
+
+//enum Role {
+ // FARMER
+ // DISTRIBUTOR
+ // RETAILER
+  //CONSUMER
+//}
+
+
